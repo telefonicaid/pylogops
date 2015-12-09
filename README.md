@@ -60,6 +60,17 @@ Pylogps includes a filter and a local_context to support using a context holding
 If you include the values using local_context, those fields will be available in formatter.
 
 ```py
+import logging
+import time
+from pylogops.logger import JsonFormatter
+
+file_handler = logging.FileHandler('/tmp/my_log.log', encoding='UTF-8')
+file_handler.setFormatter(JsonFormatter(remove_blanks=True))
+logging.basicConfig()
+logger = logging.getLogger("my_logger")
+logger.addHandler(file_handler)
+logger.setLevel(logging.INFO)
+logger.info("Msg")
 ```
 
 local_context is a thread.local() that is shared in current thread for all modules; typically you will include the values in a middleware or some kind of transversal module.
