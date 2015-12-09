@@ -47,6 +47,7 @@ logger.addHandler(file_handler)
 logger.setLevel(logging.INFO)
 logger.info("Msg")
 
+
 ```
 this will produce a log in json:
 ```json
