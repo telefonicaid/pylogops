@@ -10,8 +10,8 @@ python:
 
 install:
   - pip install -r requirements_dev.txt
-  - echo "$TRAVIS_PYTHON_VERSION"
-  - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then travis_retry pip install ordereddict mock; fi
+  - if [[ "$TRAVIS_PYTHON_VERSION" == "2.6" ]]; then travis_retry pip install ordereddict mock; fi
+  - pip freeze
 
 script: nosetests -s -v --with-coverage --cover-branches --cover-package=pylogops
  

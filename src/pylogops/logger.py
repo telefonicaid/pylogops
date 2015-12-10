@@ -38,7 +38,7 @@ class TrackingFilter(logging.Filter):
         return True
 
 
-class JsonFormatter(logging.Formatter):
+class JsonFormatter(logging.Formatter, object):
     """Overrides Formatter to log messages in json format.
     It defines an ordered list of LogRecord fields to be serialized in json; the
     output name of the fields can also be specified as it is common to change it (e.g.
