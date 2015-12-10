@@ -9,7 +9,8 @@ python:
   - "3.5"
 
 install:
-  - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then travis_retry pip install ordereddict; fi
+  - pip install -r requirements_dev.txt
+  - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then travis_retry pip install ordereddict mock; fi
 
 script: nosetests -s -v -with-coverage --cover-branches --cover-package=pylogops
  
