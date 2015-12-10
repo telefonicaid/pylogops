@@ -72,13 +72,10 @@ class JsonFormatter(logging.Formatter, object):
                 ('op', 'op_type'), ('comp', 'module'), ('msg', 'message')]
 
     def __init__(self, converter=None, remove_blanks=False, keys_fmt=None):
-        print(keys_fmt)
         if converter:
             self.converter = converter
         if keys_fmt:
-            print("sestting to keys_fmt")
             self.keys_fmt = keys_fmt
-        print(self.keys_fmt)
         self.remove_blanks = remove_blanks
         self._keys_fmt = OrderedDict(self.keys_fmt)
         self.json_encoder = JSONEncoder()
