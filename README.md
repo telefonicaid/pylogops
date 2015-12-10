@@ -9,7 +9,9 @@ Really simple json formatter for python projects.
 ```bash
 pip install pylogps
 ```
+
 if you want use with python2.6 you must install the backport ordereddict as well:
+
 ```bash
 pip install ordereddict
 ```
@@ -66,26 +68,61 @@ You can configure the formatter in any way provided by python logging library, e
 ### Context support
 
 Pylogps includes a filter and a local_context to support using a context holding information about a correlator (corr), transaction (trans) and operation (op).
-If you include the values using local_context, those fields will be available in formatter.
+If you include the values using local_context, those fields will be available in formatter. You need to add a Filter:
 
 ```py
 import logging
 import time
-from pylogops.logger import JsonFormatter
+from pylogops.logger import TrackingFilter, JsonFormatter
 
 file_handler = logging.FileHandler('/tmp/my_log.log', encoding='UTF-8')
+file_handler.addFilter(TrackingFilter())
 file_handler.setFormatter(JsonFormatter(remove_blanks=True))
 logging.basicConfig()
 logger = logging.getLogger("my_logger")
 logger.addHandler(file_handler)
 logger.setLevel(logging.INFO)
+
+
+from pylogops import local_context
+local_context.transaction_id = "trans"
+local_context.correlator_id = "corr"
+local_context.op_type = "op"
+
 logger.info("Msg")
+```
+This will produce the json log:
+```json
+{"time": "2015-12-10T15:23:52.117Z", "lvl": "INFO", "corr": "corr", "trans": "trans", "op": "op", "comp": "<stdin>", "msg": "Msg"}
 ```
 
 local_context is a thread.local() that is shared in current thread for all modules; typically you will include the values in a middleware or some kind of transversal module.
 
 
 ### Customizing json fields
+
+You can specify the fields for output in json in this way:
+```py
+import logging
+import time
+from pylogops.logger import JsonFormatter
+
+file_handler = logging.FileHandler('/tmp/my_log.log', encoding='UTF-8')
+file_handler.setFormatter(JsonFormatter(keys_fmt=[('lvl', 'levelname'), ('msg', 'message')]))
+logging.basicConfig()
+logger = logging.getLogger("my_logger")
+logger.addHandler(file_handler)
+logger.setLevel(logging.INFO)
+logger.info("Msg")
+
+
+```
+this will produce a log in json:
+
+```json
+{"lvl": "INFO", "msg": "Msg"}
+```
+
 
 ## License
 

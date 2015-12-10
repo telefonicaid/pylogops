@@ -74,7 +74,7 @@ class JsonFormatter(logging.Formatter, object):
     def __init__(self, converter=None, remove_blanks=False, keys_fmt=None):
         if converter:
             self.converter = converter
-        if keys_fmt:
+        if keys_fmt and isinstance(keys_fmt, list):
             self.keys_fmt = keys_fmt
         self.remove_blanks = remove_blanks
         self._keys_fmt = OrderedDict(self.keys_fmt)
