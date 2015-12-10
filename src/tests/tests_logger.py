@@ -1,7 +1,12 @@
+import six
 from unittest import TestCase
 from pylogops import local_context
-from mock import MagicMock, patch
 from pylogops.logger import TrackingFilter
+
+if six.PY3:
+    from unittest.mock import MagicMock  # @UnusedImport @UnresolvedImport
+else:
+    from mock import MagicMock  # @Reimport
 
 
 class TestLogger(TestCase):

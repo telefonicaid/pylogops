@@ -9,6 +9,7 @@ python:
   - "3.5"
 
 install:
+  - pip install -r requirements.txt
   - pip install -r requirements_dev.txt
   - if [[ "$TRAVIS_PYTHON_VERSION" == "2.6" ]]; then travis_retry pip install ordereddict mock; fi
   - pip freeze

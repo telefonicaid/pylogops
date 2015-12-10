@@ -3,6 +3,7 @@
 
 import logging
 import time
+import six
 from pylogops import local_context
 try:
     # make this work in py2.6
@@ -86,7 +87,7 @@ class JsonFormatter(logging.Formatter, object):
         except Exception as e:
             # In the situations where encode does not work, don't raise any exception
             # that may stop the program; it is better to avoid logging
-            print "Error encoding log entry into JSON: {0}".format(str(e))
+            raise Exception("Error encoding log entry into JSON: {0}".format(str(e)))
 
     def format(self, record):
         # Get message and time
@@ -96,7 +97,7 @@ class JsonFormatter(logging.Formatter, object):
 
         # Serialize record keys to json (just the configured ones and extra)
         record_dict = OrderedDict([(key, getattr(record, log_key, None))
-                                   for key, log_key in self._keys_fmt.iteritems()])
+                                   for key, log_key in six.iteritems(self._keys_fmt)])
         if hasattr(record, 'additional') and record.additional:
             record_dict.update(record.additional.items())
         # Add exception info (if available)
@@ -105,7 +106,7 @@ class JsonFormatter(logging.Formatter, object):
             record_dict.update({'exc_text': record.exc_text})
         # Remove blanks items
         if self.remove_blanks:
-            empty_keys = [k for k, v in record_dict.iteritems() if not v]
+            empty_keys = [k for k, v in six.iteritems(record_dict) if not v]
             for key in empty_keys:
                 del record_dict[key]
 

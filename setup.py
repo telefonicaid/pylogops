@@ -1,5 +1,15 @@
 from setuptools import setup, find_packages
 
+def get_requirements():
+    reqs_file = 'requirements.txt'
+    try:
+        with open(reqs_file) as reqs_file:
+            reqs = filter(None, map(lambda line: line.replace('\n', '').strip(), reqs_file))
+            return reqs
+    except IOError:
+        pass
+    return []
+
 setup(
     name="pylogops",
     version="1.0.0",
@@ -14,6 +24,7 @@ setup(
     maintainer_email='eduardo.alonsogarcia@telefonica.com',
     packages=find_packages('src'),
     package_dir={'': 'src'},
+    install_requires=get_requirements(),
     zip_safe=False,
     classifiers=[
         'Framework :: Python',
