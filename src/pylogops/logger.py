@@ -86,7 +86,7 @@ class JsonFormatter(logging.Formatter, object):
         except Exception as e:
             # In the situations where encode does not work, don't raise any exception
             # that may stop the program; it is better to avoid logging
-            print "Error encoding log entry into JSON: {}".format(str(e))
+            print "Error encoding log entry into JSON: {0}".format(str(e))
 
     def format(self, record):
         # Get message and time
