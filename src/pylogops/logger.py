@@ -17,25 +17,25 @@ from json import JSONEncoder
 
 class TrackingFilter(logging.Filter):
     """Filter to include in record the track records attributes:
-        transaction_id
-        correlator_id
-        op_type
+        trans (transaction id)
+        corr (correlator id)
+        op (operation)
     This values should be included in local_context (e.g. with every request)
     and can be used in formatters later.
 
     from pylogops import local_context
     import uuid
-    local_context.transaction_id = uuid.uuid4().hex
-    local_context.correlator_id = "corr"
+    local_context.trans = uuid.uuid4().hex
+    local_context.corr = "corr"
 
     local_context use thread.local to store values to be shared in all modules that use it.
     """
 
     def filter(self, record):
         # Add attributes to LogRecord required by Tdaf Formatters
-        record.transaction_id = getattr(local_context, 'transaction_id', None)
-        record.correlator_id = getattr(local_context, 'correlator_id', None)
-        record.op_type = getattr(local_context, 'op_type', None)
+        record.trans = getattr(local_context, 'trans', None)
+        record.corr = getattr(local_context, 'corr', None)
+        record.op = getattr(local_context, 'op', None)
         return True
 
 
@@ -68,8 +68,8 @@ class JsonFormatter(logging.Formatter, object):
 
     converter = time.gmtime
     keys_fmt = [('time', 'utctime'), ('lvl', 'levelname'),
-                ('corr', 'correlator_id'), ('trans', 'transaction_id'),
-                ('op', 'op_type'), ('comp', 'module'), ('msg', 'message')]
+                ('corr', 'corr'), ('trans', 'trans'),
+                ('op', 'op'), ('comp', 'module'), ('msg', 'message')]
 
     def __init__(self, converter=None, remove_blanks=False, keys_fmt=None):
         if converter:

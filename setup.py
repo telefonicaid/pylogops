@@ -5,7 +5,7 @@ def get_requirements():
     try:
         with open(reqs_file) as reqs_file:
             reqs = filter(None, map(lambda line: line.replace('\n', '').strip(), reqs_file))
-            return reqs
+            return list(reqs)
     except IOError:
         pass
     return []

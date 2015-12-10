@@ -153,9 +153,9 @@ class TestBasicConfigLogging(TestCase):
             test_logger = logging.getLogger("test")
             test_logger.addHandler(file_handler)
             test_logger.setLevel(logging.DEBUG)
-            local_context.transaction_id = "trans"
-            local_context.correlator_id = "corr"
-            local_context.op_type = "op"
+            local_context.trans = "trans"
+            local_context.corr = "corr"
+            local_context.op = "op"
             test_logger.info("Msg1")
             test_logger.debug("Msg2")
             test_logger.error("Msg3")
