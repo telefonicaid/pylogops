@@ -92,7 +92,7 @@ class JsonFormatter(logging.Formatter, object):
         # Get message and time
         record.message = record.getMessage()
         record.asctime = self.formatTime(record, self.datefmt)
-        record.utctime = "{}.{:03.0f}Z".format(record.asctime, record.msecs)
+        record.utctime = "{0}.{1:03.0f}Z".format(record.asctime, record.msecs)
 
         # Serialize record keys to json (just the configured ones and extra)
         record_dict = OrderedDict([(key, getattr(record, log_key, None))
