@@ -4,7 +4,11 @@
 import logging
 import time
 from pylogops import local_context
-from collections import OrderedDict
+try:
+    # make this work in py2.6
+    from ordereddict import OrderedDict
+except ImportError:
+    from collections import OrderedDict
 # ujson is quick that json but does not support OrderedDicts
 # in loads operation the performance difference is not so big ...
 from json import JSONEncoder

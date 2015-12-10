@@ -9,6 +9,11 @@ Really simple json formatter for python projects.
 ```bash
 pip install pylogps
 ```
+if you want use with python2.6 you must install the backport ordereddict as well:
+```bash
+pip install ordereddict
+```
+
 
 ## Basic usage
 You will have to specify the formatter *JsonFormatter* in any handler that you use in standar python logging:

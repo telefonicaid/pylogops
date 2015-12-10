@@ -8,5 +8,8 @@ python:
   - "3.4"
   - "3.5"
 
-script: nosetests
+install:
+  - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then travis_retry pip install ordereddict; fi
+
+script: nosetests -s -v -with-coverage --cover-branches --cover-package=pylogops
  
