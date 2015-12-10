@@ -1,0 +1,9 @@
+*.pyc
+.project
+.pydevproject
+.coverage
+cover
+dist
+build
+.settings
+pylogops.egg-info
