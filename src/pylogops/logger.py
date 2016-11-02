@@ -78,7 +78,7 @@ class JsonFormatter(logging.Formatter, object):
             self.keys_fmt = keys_fmt
         self.remove_blanks = remove_blanks
         self._keys_fmt = OrderedDict(self.keys_fmt)
-        self.json_encoder = JSONEncoder()
+        self.json_encoder = JSONEncoder(separators=(",", ":"))
         super(JsonFormatter, self).__init__(fmt=None, datefmt='%Y-%m-%dT%H:%M:%S')
 
     def encode(self, record_dict):
