@@ -12,7 +12,7 @@ def get_requirements():
 
 setup(
     name="pylogops",
-    version="1.0.0",
+    version="1.1.0",
     url='http://github.com/telefonicaid/pylogops',
     license='BSD',
     platforms=['OS Independent'],
@@ -27,7 +27,6 @@ setup(
     install_requires=get_requirements(),
     zip_safe=False,
     classifiers=[
-        'Framework :: Python',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
@@ -40,6 +39,6 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: Implementation :: CPython',
-        'Programming Language :: Python :: Implementation :: PyPy',
+        'Programming Language :: Python :: Implementation :: PyPy'
     ]
 )

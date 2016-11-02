@@ -37,12 +37,12 @@ class TestConfigFileLogging(TestCase):
         if six.PY3:
             open_mock.assert_called_once_with('/test/fake_file.log', 'a', encoding='UTF-8')
             open_mock.return_value.write.assert_has_calls([call(RegexpMatch(
-                '{"time": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z", '
-                '"lvl": "INFO", "corr": null, "trans": null, "op": null, '
-                '"comp": "tests_config_file", "msg": "Msg"}')), call('\n')])
+                '{"time":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z",'
+                '"lvl":"INFO","corr":null,"trans":null,"op":null,'
+                '"comp":"tests_config_file","msg":"Msg"}')), call('\n')])
         else:
             open_mock.assert_called_once_with('/test/fake_file.log', 'a', 'UTF-8')
             open_mock.return_value.write.assert_called_once_with(RegexpMatch(
-                '{"time": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z", '
-                '"lvl": "INFO", "corr": null, "trans": null, "op": null, '
-                '"comp": "tests_config_file", "msg": "Msg"}\n'))
+                '{"time":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z",'
+                '"lvl":"INFO","corr":null,"trans":null,"op":null,'
+                '"comp":"tests_config_file","msg":"Msg"}\n'))

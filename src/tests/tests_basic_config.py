@@ -44,15 +44,15 @@ class TestBasicConfigLogging(TestCase):
         if six.PY3:
             open_mock.assert_called_once_with('/test/fake_file.log', 'a', encoding='UTF-8')
             open_mock.return_value.write.assert_has_calls([call(RegexpMatch(
-                '{"time": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z", '
-                '"lvl": "INFO", "corr": null, "trans": null, "op": null, '
-                '"comp": "tests_basic_config", "msg": "Msg"}')), call('\n')])
+                '{"time":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z",'
+                '"lvl":"INFO","corr":null,"trans":null,"op":null,'
+                '"comp":"tests_basic_config","msg":"Msg"}')), call('\n')])
         else:
             open_mock.assert_called_once_with('/test/fake_file.log', 'a', 'UTF-8')
             open_mock.return_value.write.assert_called_once_with(RegexpMatch(
-                '{"time": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z", '
-                '"lvl": "INFO", "corr": null, "trans": null, "op": null, '
-                '"comp": "tests_basic_config", "msg": "Msg"}\n'))
+                '{"time":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z",'
+                '"lvl":"INFO","corr":null,"trans":null,"op":null,'
+                '"comp":"tests_basic_config","msg":"Msg"}\n'))
 
     def test_json_formater_with_localtime(self):
         with self.patch_open as open_mock:
@@ -68,15 +68,15 @@ class TestBasicConfigLogging(TestCase):
         if six.PY3:
             open_mock.assert_called_once_with('/test/fake_file.log', 'a', encoding='UTF-8')
             open_mock.return_value.write.assert_has_calls([call(RegexpMatch(
-                '{"time": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z", '
-                '"lvl": "INFO", "corr": null, "trans": null, "op": null, '
-                '"comp": "tests_basic_config", "msg": "Msg"}')), call('\n')])
+                '{"time":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z",'
+                '"lvl":"INFO","corr":null,"trans":null,"op":null,'
+                '"comp":"tests_basic_config","msg":"Msg"}')), call('\n')])
         else:
             open_mock.assert_called_once_with('/test/fake_file.log', 'a', 'UTF-8')
             open_mock.return_value.write.assert_called_once_with(RegexpMatch(
-                '{"time": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z", '
-                '"lvl": "INFO", "corr": null, "trans": null, "op": null, '
-                '"comp": "tests_basic_config", "msg": "Msg"}\n'))
+                '{"time":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z",'
+                '"lvl":"INFO","corr":null,"trans":null,"op":null,'
+                '"comp":"tests_basic_config","msg":"Msg"}\n'))
 
     def test_json_formater_with_keys_fmt(self):
         with self.patch_open as open_mock:
@@ -92,11 +92,11 @@ class TestBasicConfigLogging(TestCase):
         if six.PY3:
             open_mock.assert_called_once_with('/test/fake_file.log', 'a', encoding='UTF-8')
             open_mock.return_value.write.assert_has_calls([call(RegexpMatch(
-                '{"lvl": "INFO", "msg": "Msg"}')), call('\n')])
+                '{"lvl":"INFO","msg":"Msg"}')), call('\n')])
         else:
             open_mock.assert_called_once_with('/test/fake_file.log', 'a', 'UTF-8')
             open_mock.return_value.write.assert_called_once_with(RegexpMatch(
-                '{"lvl": "INFO", "msg": "Msg"}\n'))
+                '{"lvl":"INFO","msg":"Msg"}\n'))
 
     def test_json_formater_removing_empty_keys(self):
         with self.patch_open as open_mock:
@@ -112,13 +112,13 @@ class TestBasicConfigLogging(TestCase):
         if six.PY3:
             open_mock.assert_called_once_with('/test/fake_file.log', 'a', encoding='UTF-8')
             open_mock.return_value.write.assert_has_calls([call(RegexpMatch(
-                '{"time": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z", '
-                '"lvl": "INFO", "comp": "tests_basic_config", "msg": "Msg"}')), call('\n')])
+                '{"time":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z",'
+                '"lvl":"INFO","comp":"tests_basic_config","msg":"Msg"}')), call('\n')])
         else:
             open_mock.assert_called_once_with('/test/fake_file.log', 'a', 'UTF-8')
             open_mock.return_value.write.assert_called_once_with(RegexpMatch(
-                '{"time": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z", '
-                '"lvl": "INFO", "comp": "tests_basic_config", "msg": "Msg"}\n'))
+                '{"time":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z",'
+                '"lvl":"INFO","comp":"tests_basic_config","msg":"Msg"}\n'))
 
     def test_json_formater_with_extra(self):
         with self.patch_open as open_mock:
@@ -134,15 +134,15 @@ class TestBasicConfigLogging(TestCase):
         if six.PY3:
             open_mock.assert_called_once_with('/test/fake_file.log', 'a', encoding='UTF-8')
             open_mock.return_value.write.assert_has_calls([call(RegexpMatch(
-                '{"time": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z", '
-                '"lvl": "INFO", "corr": null, "trans": null, "op": null, '
-                '"comp": "tests_basic_config", "msg": "Msg", "key": "extra"}')), call('\n')])
+                '{"time":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z",'
+                '"lvl":"INFO","corr":null,"trans":null,"op":null,'
+                '"comp":"tests_basic_config","msg":"Msg","key":"extra"}')), call('\n')])
         else:
             open_mock.assert_called_once_with('/test/fake_file.log', 'a', 'UTF-8')
             open_mock.return_value.write.assert_called_once_with(RegexpMatch(
-                '{"time": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z", '
-                '"lvl": "INFO", "corr": null, "trans": null, "op": null, '
-                '"comp": "tests_basic_config", "msg": "Msg", "key": "extra"}\n'))
+                '{"time":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z",'
+                '"lvl":"INFO","corr":null,"trans":null,"op":null,'
+                '"comp":"tests_basic_config","msg":"Msg","key":"extra"}\n'))
 
     def test_json_formater_with_transaction(self):
         with self.patch_open as open_mock:
@@ -162,26 +162,26 @@ class TestBasicConfigLogging(TestCase):
             if six.PY3:
                 open_mock.assert_called_once_with('/test/fake_file.log', 'a', encoding='UTF-8')
                 open_mock.return_value.write.assert_has_calls([
-                    call(RegexpMatch('{"time": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z", '
-                                     '"lvl": "INFO", "corr": "corr", "trans": "trans", "op": "op", '
-                                     '"comp": "tests_basic_config", "msg": "Msg1"}')), call('\n'),
-                    call(RegexpMatch('{"time": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z", '
-                                     '"lvl": "DEBUG", "corr": "corr", "trans": "trans", "op": "op", '
-                                     '"comp": "tests_basic_config", "msg": "Msg2"}')), call('\n'),
-                    call(RegexpMatch('{"time": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z", '
-                                     '"lvl": "ERROR", "corr": "corr", "trans": "trans", "op": "op", '
-                                     '"comp": "tests_basic_config", "msg": "Msg3"}')),  call('\n')
+                    call(RegexpMatch('{"time":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z",'
+                                     '"lvl":"INFO","corr":"corr","trans":"trans","op":"op",'
+                                     '"comp":"tests_basic_config","msg":"Msg1"}')), call('\n'),
+                    call(RegexpMatch('{"time":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z",'
+                                     '"lvl":"DEBUG","corr":"corr","trans":"trans","op":"op",'
+                                     '"comp":"tests_basic_config","msg":"Msg2"}')), call('\n'),
+                    call(RegexpMatch('{"time":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z",'
+                                     '"lvl":"ERROR","corr":"corr","trans":"trans","op":"op",'
+                                     '"comp":"tests_basic_config","msg":"Msg3"}')),  call('\n')
                 ])
             else:
                 open_mock.assert_called_once_with('/test/fake_file.log', 'a', 'UTF-8')
                 open_mock.return_value.write.assert_has_calls([
-                    call(RegexpMatch('{"time": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z", '
-                                     '"lvl": "INFO", "corr": "corr", "trans": "trans", "op": "op", '
-                                     '"comp": "tests_basic_config", "msg": "Msg1"}\n')),
-                    call(RegexpMatch('{"time": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z", '
-                                     '"lvl": "DEBUG", "corr": "corr", "trans": "trans", "op": "op", '
-                                     '"comp": "tests_basic_config", "msg": "Msg2"}\n')),
-                    call(RegexpMatch('{"time": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z", '
-                                     '"lvl": "ERROR", "corr": "corr", "trans": "trans", "op": "op", '
-                                     '"comp": "tests_basic_config", "msg": "Msg3"}\n'))
+                    call(RegexpMatch('{"time":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z",'
+                                     '"lvl":"INFO","corr":"corr","trans":"trans","op":"op",'
+                                     '"comp":"tests_basic_config","msg":"Msg1"}\n')),
+                    call(RegexpMatch('{"time":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z",'
+                                     '"lvl":"DEBUG","corr":"corr","trans":"trans","op":"op",'
+                                     '"comp":"tests_basic_config","msg":"Msg2"}\n')),
+                    call(RegexpMatch('{"time":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z",'
+                                     '"lvl":"ERROR","corr":"corr","trans":"trans","op":"op",'
+                                     '"comp":"tests_basic_config","msg":"Msg3"}\n'))
                 ])
