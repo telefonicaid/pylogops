@@ -2,7 +2,7 @@
 Really simple json formatter for python projects.
 
 ### Status
-[![Build Status](https://travis-ci.org/telefonicaid/pylogops.svg)](https://github.com/telefonicaid/pylogops)
+[![Build Status](https://travis-ci.org/telefonicaid/pylogops.svg?branch=master)](https://travis-ci.org/telefonicaid/pylogops)
 
 ## Installation
 
