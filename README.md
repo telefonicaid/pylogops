@@ -39,8 +39,9 @@ this will produce a log in json:
 {"time": "2015-12-09T17:46:01.160Z", "lvl": "INFO", "corr": null, "trans": null, "op": null, "comp": "<stdin>", "msg": "Msg"}
 ```
 
-To log in console ```
-py
+To log in console change FileHandler by an StreamHandler:
+
+```py
 import logging
 import time
 from pylogops.logger import JsonFormatter
