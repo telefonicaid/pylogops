@@ -39,6 +39,21 @@ this will produce a log in json:
 {"time": "2015-12-09T17:46:01.160Z", "lvl": "INFO", "corr": null, "trans": null, "op": null, "comp": "<stdin>", "msg": "Msg"}
 ```
 
+To log in console ```
+py
+import logging
+import time
+from pylogops.logger import JsonFormatter
+
+console_handler = logging.StreamHandler()
+console_handler.setFormatter(JsonFormatter(converter=time.localtime))
+logging.basicConfig()
+logger = logging.getLogger("my_logger")
+logger.addHandler(console_handler)
+logger.setLevel(logging.INFO)
+logger.info("Msg")
+```
+
 **pylogps** by default generate all the upper fields in json output, but you can select to remove null fields:
 
 ```py
