@@ -12,11 +12,12 @@ def get_requirements():
 
 setup(
     name="pylogops",
-    version="1.1.0",
+    version="1.1.1",
     url='http://github.com/telefonicaid/pylogops',
     license='BSD',
     platforms=['OS Independent'],
     description="A simple json formatter for python logging.",
+    long_description_content_type='text/markdown',
     long_description=open('README.md').read(),
     author='Eduardo Alonso',
     author_email='eduardo.alonsogarcia@telefonica.com',
