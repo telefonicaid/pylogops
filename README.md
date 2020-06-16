@@ -139,6 +139,25 @@ this will produce a log in json:
 {"lvl": "INFO", "msg": "Msg"}
 ```
 
+### Upload to pypi
+
+Use twine to upload the package and publish in pypi.
+
+```
+pip install twine
+```
+
+Prepare the package:
+
+```
+python3 setup.py sdist bdist_wheel
+```
+
+Upload:
+
+```
+twine upload dist/*
+```
 
 ## License
 
