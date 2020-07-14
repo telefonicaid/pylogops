@@ -12,7 +12,7 @@ def get_requirements():
 
 setup(
     name="pylogops",
-    version="1.1.1",
+    version="1.2.1",
     url='http://github.com/telefonicaid/pylogops',
     license='BSD',
     platforms=['OS Independent'],

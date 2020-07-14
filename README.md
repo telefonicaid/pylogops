@@ -67,6 +67,8 @@ You can configure the formatter in any way provided by python logging library, e
 
 ### Context support
 
+#### Tracking filter
+
 Pylogps includes a filter and a local_context to support using a context holding information about a correlator (corr), transaction (trans) and operation (op).
 If you include the values using local_context, those fields will be available in formatter. You need to add a Filter:
 
@@ -85,9 +87,9 @@ logger.setLevel(logging.INFO)
 
 
 from pylogops import local_context
-local_context.transaction_id = "trans"
-local_context.correlator_id = "corr"
-local_context.op_type = "op"
+local_context.trans = "trans"
+local_context.corr = "corr"
+local_context.op = "op"
 
 logger.info("Msg")
 ```
@@ -97,7 +99,6 @@ This will produce the json log:
 ```
 
 local_context is a thread.local() that is shared in current thread for all modules; typically you will include the values in a middleware or some kind of transversal module.
-
 
 ### Customizing json fields
 
@@ -123,6 +124,33 @@ this will produce a log in json:
 {"lvl": "INFO", "msg": "Msg"}
 ```
 
+Note that if you set this formatter field you should provide ALL required fields for json (even those without change).
+
+#### Static filter
+
+A filter provided to include static content to python logger. All keyword args used in the initialization of the filter
+ will be automatically provided as values for any formatter.
+
+```py
+import logging
+import time
+from pylogops.logger import StaticFilter, JsonFormatter
+
+console_handler = logging.StreamHandler()
+console_handler.addFilter(StaticFilter(version="1.2"))
+console_handler.setFormatter(JsonFormatter(remove_blanks=True, keys_fmt=[('lvl', 'levelname'), ('msg', 'message'), ('version', 'version')]))
+logger = logging.getLogger("my_logger")
+logger.addHandler(console_handler)
+logger.setLevel(logging.INFO)
+
+logger.info("Msg")
+```
+This will produce the json log:
+```json
+{"time": "2015-12-10T15:23:52.117Z", "lvl": "INFO", "version": "1.2", "comp": "<stdin>", "msg": "Msg"}
+```
+
+ 
 ### Upload to pypi
 
 Use twine to upload the package and publish in pypi.
