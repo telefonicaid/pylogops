@@ -15,6 +15,27 @@ except ImportError:
 from json import JSONEncoder
 
 
+class StaticFilter(logging.Filter):
+    """Filter to include in record the keyword args used in the initialization
+        StaticFilter(version="2.0", another="another_value")
+
+    This values will be available for formatter.
+    You may use this filter in those cases where standard extra keyword of logger is filled with static
+    content and will avoid you to send it.
+
+    """
+
+    def __init__(self, name='', **kwargs):
+        self._extra_log_attrs = kwargs
+        super(StaticFilter, self).__init__(name=name)
+
+    def filter(self, record):
+        # Add attributes to LogRecord
+        for k,v in six.iteritems(self._extra_log_attrs):
+            setattr(record, k, v)
+        return True
+
+
 class TrackingFilter(logging.Filter):
     """Filter to include in record the track records attributes:
         trans (transaction id)
@@ -109,5 +130,4 @@ class JsonFormatter(logging.Formatter, object):
             empty_keys = [k for k, v in six.iteritems(record_dict) if not v]
             for key in empty_keys:
                 del record_dict[key]
-
         return self.encode(record_dict)
